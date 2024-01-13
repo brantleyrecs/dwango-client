@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 export default function OrderCard({ obj }) {
   // const { user } = useAuth();
+  console.warn(obj);
 
   return (
     <>

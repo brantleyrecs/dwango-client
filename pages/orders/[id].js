@@ -3,15 +3,28 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Card } from 'react-bootstrap';
 import { getSingleOrder } from '../../utils/data/orderData';
+// import { getItems } from '../../utils/data/itemData';
+import ItemCard from '../../components/cards/ItemCards';
 // import { useAuth } from '../../utils/context/authContext';
 
 function ViewOrder() {
   const [orderDetails, setOrderDetails] = useState({});
+  const [items, setItems] = useState([]);
   const router = useRouter();
   const { id } = router.query ?? {};
 
+  setTimeout(() => {
+    setItems(orderDetails.items);
+  }, 1);
+  // const getAllItems = () => {
+  //   setItems(orderDetails.items);
+  // };
+
   useEffect(() => {
     getSingleOrder(id).then(setOrderDetails);
+    // setTimeout(() => {
+    //   setItems(orderDetails.items);
+    // }, 1000);
   }, [id]);
 
   return (
@@ -29,6 +42,20 @@ function ViewOrder() {
           </Card.Text>
         </Card.Body>
       </Card>
+
+      <div style={{
+        display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center',
+      }}
+      >
+        {items?.map((item) => (
+          <div key={`item--${item.id}`} className="item">
+            <ItemCard
+              obj={item}
+              // onUpdate={showOrders}
+            />
+          </div>
+        ))}
+      </div>
     </>
   );
 }
