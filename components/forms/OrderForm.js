@@ -43,16 +43,18 @@ const OrderForm = ({ orderObj }) => {
     }));
   };
 
+  console.warn(orderObj);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (orderObj.id) {
       const payload = {
         id: currentOrder.id,
-        title: currentOrder.title,
-        imageUrl: currentOrder.image_url,
-        content: currentOrder.content,
-        categoryId: currentOrder.category,
-        publicationDate: currentOrder.publication_date,
+        customerName: currentOrder.customerName,
+        phoneNumber: currentOrder.phoneNumber,
+        email: currentOrder.email,
+        orderType: currentOrder.orderType,
+        status: orderObj.status,
         userId: user.id,
       };
       updateOrder(currentOrder.id, payload)
@@ -71,18 +73,15 @@ const OrderForm = ({ orderObj }) => {
         <Form onSubmit={handleSubmit}>
 
           {/* Customer Name */}
-          <input type="text" name="customerName" className="input" placeholder="Customer Name" required value={currentOrder.customer_name} onChange={handleChange} />
+          <input type="text" name="customerName" className="input" placeholder="Customer Name" required value={currentOrder.customerName} onChange={handleChange} />
 
           {/* Customer Phone Number */}
-          <input type="text" name="phoneNumber" className="input" placeholder="Customer Phone Number" required value={currentOrder.phone_number} onChange={handleChange} />
+          <input type="text" name="phoneNumber" className="input" placeholder="Customer Phone Number" required value={currentOrder.phoneNumber} onChange={handleChange} />
 
           {/* Customer Email */}
           <input type="text" name="email" className="input" placeholder="Customer Email" required value={currentOrder.email} onChange={handleChange} />
 
-          {/* Order Type */}
-          {/* <input type="text" name="title" className="input" placeholder="Order Type (Phone-in/Walk-in)" required value={currentOrder.order_type} onChange={handleChange} /> */}
-
-          <select className="input" name="orderType" value={currentOrder.order_type} onChange={handleChange}>
+          <select className="input" name="orderType" value={currentOrder.orderType} onChange={handleChange}>
             <option value="">Select an Order Type</option>
             <option value="phone_in">Phone-In</option>
             <option value="walk_in">Walk-In</option>

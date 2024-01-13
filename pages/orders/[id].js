@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import { getSingleOrder } from '../../utils/data/orderData';
 // import { getItems } from '../../utils/data/itemData';
 import ItemCard from '../../components/cards/ItemCards';
@@ -42,6 +42,9 @@ function ViewOrder() {
           </Card.Text>
         </Card.Body>
       </Card>
+
+      {/* <button type="button" style={{ marginTop: '20px', marginBottom: '20px' }} href={`../orders/edit/${orderDetails.id}`}>Edit Order</button> */}
+      <Button className="delete-button" variant="black" href={`/orders/edit/${orderDetails.id}`}>Edit This Post</Button>
 
       <div style={{
         display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center',
