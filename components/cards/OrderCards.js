@@ -11,7 +11,7 @@ export default function OrderCard({ obj }) {
   return (
     <>
       <Link href={`/orders/${obj.id}`} passHref>
-        <Card style={{ cursor: 'pointer', margin: '20px' }}>
+        <Card className="card" style={{ cursor: 'pointer', margin: '20px' }}>
           <Card.Body>{obj.customer_name}</Card.Body>
           <Card.Body>{obj.phone_number}</Card.Body>
         </Card>

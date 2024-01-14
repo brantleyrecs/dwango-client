@@ -5,7 +5,7 @@ import { Card } from 'react-bootstrap';
 export default function ItemCard({ obj }) {
   return (
     <>
-      <Card style={{ width: '18rem' }}>
+      <Card className="card" style={{ width: '18rem', margin: '20px' }}>
         <Card.Body>
           <Card.Title>{obj.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{obj.price}</Card.Subtitle>
