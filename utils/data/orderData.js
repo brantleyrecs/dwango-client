@@ -70,10 +70,28 @@ const deleteOrder = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const addItem = (id, item) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/orders/${id}/order_item`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(item),
+  })
+    .then((data) => {
+      resolve(data);
+    })
+    .catch((error) => {
+      console.error('Error: Item not added:', error);
+      reject(error);
+    });
+});
+
 export {
   getOrders,
   getSingleOrder,
   createOrder,
   updateOrder,
   deleteOrder,
+  addItem,
 };

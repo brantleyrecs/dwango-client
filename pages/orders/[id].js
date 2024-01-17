@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
+// import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Card, Button } from 'react-bootstrap';
 import { getSingleOrder, deleteOrder } from '../../utils/data/orderData';
 // import { getItems } from '../../utils/data/itemData';
 import ItemCard from '../../components/cards/ItemCards';
-// import { useAuth } from '../../utils/context/authContext';
+import OrderMenu from '../../components/cards/OrderMenu';
 
 function ViewOrder() {
   const [orderDetails, setOrderDetails] = useState({});
+  const [modalShow, setModalShow] = React.useState(false);
   const [items, setItems] = useState([]);
   const router = useRouter();
   const { id } = router.query ?? {};
@@ -24,6 +26,7 @@ function ViewOrder() {
       });
     }
   };
+  console.warn(orderDetails.id);
 
   useEffect(() => {
     getSingleOrder(id).then(setOrderDetails);
@@ -47,7 +50,15 @@ function ViewOrder() {
 
       {/* <button type="button" style={{ marginTop: '20px', marginBottom: '20px' }} href={`../orders/edit/${orderDetails.id}`}>Edit Order</button> */}
       <Button className="delete-button" variant="black" onClick={deleteThisOrder}>Delete This Order</Button>
-      <Button className="delete-button" variant="black" href={`/orders/edit/${orderDetails.id}`}>Edit This Post</Button>
+      <Button className="delete-button" variant="black" href={`/orders/edit/${orderDetails.id}`}>Edit Order</Button>
+      <Button className="delete-button" variant="black" href={`/orders/edit/${orderDetails.id}/order_item`}>Add Item</Button>
+
+      {/* MODAL */}
+      {/* <Button variant="primary" onClick={() => setModalShow(true)}>
+        Add Item
+      </Button> */}
+
+      <OrderMenu orderId={orderDetails.id} show={modalShow} onHide={() => setModalShow(false)} />
 
       <div style={{
         display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', margin: '20px',

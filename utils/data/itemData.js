@@ -22,7 +22,7 @@ const getSingleItem = (id) => new Promise((resolve, reject) => {
     .then((response) => response.json())
     .then((data) => resolve(data))
     .catch((error) => {
-      console.warn('Error retrieving item:', error);
+      // console.warn('Error retrieving item:', error);
       reject(error);
     });
 });
