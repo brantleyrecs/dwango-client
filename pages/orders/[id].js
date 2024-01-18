@@ -56,7 +56,7 @@ function ViewOrder() {
       {/* MODAL */}
       <OrderMenu orderId={orderDetails.id} show={modalShow} onHide={() => setModalShow(false)} />
 
-      <RevenueNode key={orderDetails.id} orderDetails={orderDetails} show={modalShow} onHide={() => setModalShow(false)} />
+      <RevenueNode orderDetails={orderDetails} show={modalShow} onHide={() => setModalShow(false)} />
 
       <div style={{
         display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', margin: '20px',

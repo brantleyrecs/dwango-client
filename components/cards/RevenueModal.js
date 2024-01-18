@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Modal } from 'react-bootstrap';
 import { useRouter } from 'next/router';
-// eslint-disable-next-line import/no-unresolved
-// import { format } from 'date-fns';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import DateObject from 'react-date-object';
+// // eslint-disable-next-line import/no-extraneous-dependencies
+// import DateObject from 'react-date-object';
 import { createRevenueNode, updateOrder } from '../../utils/data/orderData';
 
 const initialState = {
@@ -17,12 +15,14 @@ const initialState = {
   tipAmount: 0,
 };
 
+console.warn(updateOrder);
+
 function RevenueNode({ orderDetails }) {
   const [modalShow, setModalShow] = useState(false);
   const [revenue, setRevenue] = useState(initialState);
   const router = useRouter();
 
-  const date = new DateObject();
+  // const date = new DateObject();
 
   const handleShow = () => {
     setModalShow(true);
@@ -56,12 +56,13 @@ function RevenueNode({ orderDetails }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const payload = { ...revenue, orderId: orderDetails.id, date_of_closure: date.toString() };
+    const payload = { ...revenue, orderId: orderDetails.id };
     createRevenueNode(payload)
-      .then(({ closed }) => {
-        const patchOrder = { status: closed };
-        updateOrder(patchOrder).then(() => router.push('/orders'));
-      });
+      .then(() => router.push('/orders'));
+    // .then(({ closed }) => {
+    //   const patchOrder = { status: closed };
+    //   updateOrder(patchOrder);
+    // });
   };
 
   // const calculateOrderTotal = () => {
@@ -94,7 +95,7 @@ function RevenueNode({ orderDetails }) {
             <Modal.Body>
               <p>{orderDetails.customer_name}</p>
               <p>{orderDetails.phone_number}</p>
-              <p>{date.toString()}</p>
+              {/* <p>{date.toString()}</p> */}
               {/* <p>{calculateOrderTotal()}</p> */}
               <Form>
                 {/* Tip Amount */}
