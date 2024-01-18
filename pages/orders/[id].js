@@ -7,6 +7,7 @@ import { getSingleOrder, deleteOrder } from '../../utils/data/orderData';
 // import { getItems } from '../../utils/data/itemData';
 import ItemCard from '../../components/cards/ItemCards';
 import OrderMenu from '../../components/cards/OrderMenu';
+import RevenueNode from '../../components/cards/RevenueModal';
 
 function ViewOrder() {
   const [orderDetails, setOrderDetails] = useState({});
@@ -26,7 +27,7 @@ function ViewOrder() {
       });
     }
   };
-  console.warn(orderDetails.id);
+  console.warn(orderDetails);
 
   useEffect(() => {
     getSingleOrder(id).then(setOrderDetails);
@@ -51,14 +52,11 @@ function ViewOrder() {
       {/* <button type="button" style={{ marginTop: '20px', marginBottom: '20px' }} href={`../orders/edit/${orderDetails.id}`}>Edit Order</button> */}
       <Button className="delete-button" variant="black" onClick={deleteThisOrder}>Delete This Order</Button>
       <Button className="delete-button" variant="black" href={`/orders/edit/${orderDetails.id}`}>Edit Order</Button>
-      <Button className="delete-button" variant="black" href={`/orders/edit/${orderDetails.id}/order_item`}>Add Item</Button>
 
       {/* MODAL */}
-      {/* <Button variant="primary" onClick={() => setModalShow(true)}>
-        Add Item
-      </Button> */}
-
       <OrderMenu orderId={orderDetails.id} show={modalShow} onHide={() => setModalShow(false)} />
+
+      <RevenueNode key={orderDetails.id} orderDetails={orderDetails} show={modalShow} onHide={() => setModalShow(false)} />
 
       <div style={{
         display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', margin: '20px',
@@ -68,6 +66,7 @@ function ViewOrder() {
           <div key={`item--${item.id}`} className="item">
             <ItemCard
               obj={item}
+              orderId={orderDetails.id}
               // onUpdate={showOrders}
             />
           </div>

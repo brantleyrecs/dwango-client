@@ -43,8 +43,6 @@ const OrderForm = ({ orderObj }) => {
     }));
   };
 
-  console.warn(orderObj);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (orderObj.id) {

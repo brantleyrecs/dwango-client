@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Form, FloatingLabel } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { getItems } from '../../utils/data/itemData';
 // import ItemCard from './ItemCards';
 // import AddItemCard from './AddItemCard';
@@ -19,7 +19,15 @@ function OrderMenu({ orderId }) {
   const [formInput, setFormInput] = useState(initialState);
   const [modalShow, setModalShow] = React.useState(false);
   const [menuItems, setMenuItems] = useState([]);
-  const router = useRouter();
+
+  const handleShow = () => {
+    setModalShow(true);
+  };
+
+  const handleClose = () => {
+    setModalShow(false);
+  };
+  // const router = useRouter();
 
   const allMenuItems = () => {
     getItems().then(setMenuItems);
@@ -37,7 +45,9 @@ function OrderMenu({ orderId }) {
     e.preventDefault();
     // console.warn(orderId);
     const payload = formInput;
-    addItem(orderId, payload).then(() => router.push('/orders'));
+    addItem(orderId, payload).then(() => {
+      window.location.reload();
+    });
   };
 
   useEffect(() => {
@@ -48,14 +58,6 @@ function OrderMenu({ orderId }) {
       order: orderId,
     }));
   }, [menuItems.id, orderId]);
-
-  const handleShow = () => {
-    setModalShow(true);
-  };
-
-  const handleClose = () => {
-    setModalShow(false);
-  };
 
   return (
     <>

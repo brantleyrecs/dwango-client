@@ -87,6 +87,32 @@ const addItem = (id, item) => new Promise((resolve, reject) => {
     });
 });
 
+const removeItem = (id) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/order_items/${id}`, {
+    method: 'DELETE',
+  })
+    .then(resolve())
+    .catch(reject);
+});
+
+const createRevenueNode = (node) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/revenue-nodes`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(node),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      resolve(data);
+    })
+    .catch((error) => {
+      console.error('Error: Order not Created:', error);
+      reject(error);
+    });
+});
+
 export {
   getOrders,
   getSingleOrder,
@@ -94,4 +120,6 @@ export {
   updateOrder,
   deleteOrder,
   addItem,
+  removeItem,
+  createRevenueNode,
 };
