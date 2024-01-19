@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
 import { getOrders } from '../utils/data/orderData';
 import OrderCard from '../components/cards/OrderCards';
 
@@ -18,6 +19,9 @@ function Orders() {
 
   return (
     <>
+      <Head>
+        <title>Orders</title>
+      </Head>
       <div className="post-header">
         <h1 className="welcome-text">Orders</h1>
       </div>

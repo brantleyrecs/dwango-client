@@ -1,11 +1,15 @@
 import { Nav } from 'react-bootstrap';
 import Link from 'next/link';
+import Head from 'next/head';
 import { useAuth } from '../utils/context/authContext';
 
 function Home() {
   const { user } = useAuth();
   return (
     <>
+      <Head>
+        <title>Home</title>
+      </Head>
       <div
         className="text-center d-flex flex-column justify-content-center align-content-center"
         style={{
@@ -32,7 +36,11 @@ function Home() {
             </Link>
           </div>
           <div className="cards green">
-            <p className="tip">View Revenue</p>
+            <Link passHref href="/revenue">
+              <Nav.Link>
+                <p className="tip">View Revenue</p>
+              </Nav.Link>
+            </Link>
           </div>
         </div>
       </div>
