@@ -1,26 +1,42 @@
-import { Button } from 'react-bootstrap';
-import { signOut } from '../utils/auth';
+import { Nav } from 'react-bootstrap';
+import Link from 'next/link';
 import { useAuth } from '../utils/context/authContext';
 
 function Home() {
   const { user } = useAuth();
   return (
-    <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
-      style={{
-        height: '90vh',
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
-      }}
-    >
-      <h1>Hello {user.fbUser.displayName}! </h1>
-      <p>Your Bio: {user.bio}</p>
-      <p>Click the button below to logout!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-        Sign Out
-      </Button>
-    </div>
+    <>
+      <div
+        className="text-center d-flex flex-column justify-content-center align-content-center"
+        style={{
+          height: '90vh',
+          padding: '30px',
+          maxWidth: '400px',
+          margin: '0 auto',
+        }}
+      >
+        <h1 style={{ marginBottom: '50px' }}>Welcome {user.name}! </h1>
+        <div className="links" style={{ marginLeft: '50px' }}>
+          <div className="cards red">
+            <Link passHref href="/orders/new">
+              <Nav.Link>
+                <p className="tip">Create New Order</p>
+              </Nav.Link>
+            </Link>
+          </div>
+          <div className="cards blue">
+            <Link passHref href="/orders">
+              <Nav.Link>
+                <p className="tip">View Orders</p>
+              </Nav.Link>
+            </Link>
+          </div>
+          <div className="cards green">
+            <p className="tip">View Revenue</p>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
