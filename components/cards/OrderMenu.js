@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
 import { Form, FloatingLabel } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-// import { useRouter } from 'next/router';
 import { getItems } from '../../utils/data/itemData';
-// import ItemCard from './ItemCards';
-// import AddItemCard from './AddItemCard';
 import { addItem } from '../../utils/data/orderData';
 
 const initialState = {
@@ -27,7 +23,6 @@ function OrderMenu({ orderId }) {
   const handleClose = () => {
     setModalShow(false);
   };
-  // const router = useRouter();
 
   const allMenuItems = () => {
     getItems().then(setMenuItems);
@@ -43,7 +38,6 @@ function OrderMenu({ orderId }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.warn(orderId);
     const payload = formInput;
     addItem(orderId, payload).then(() => {
       window.location.reload();
@@ -83,8 +77,6 @@ function OrderMenu({ orderId }) {
               name="item"
               onChange={handleChange}
               value={formInput.item}
-              onSelect={console.warn(formInput)}
-              // onSelect={console.warn(formInput.id)}
               className="mb-3"
             >
               <option value="">Select an Item</option>

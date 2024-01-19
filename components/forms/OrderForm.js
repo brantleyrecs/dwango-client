@@ -98,16 +98,12 @@ const OrderForm = ({ orderObj }) => {
 OrderForm.propTypes = {
   orderObj: PropTypes.shape({
     id: PropTypes.number,
-    customer_name: PropTypes.string.isRequired,
-    phone_number: PropTypes.number.isRequired,
+    customer_name: PropTypes.string,
+    phone_number: PropTypes.number,
     email: PropTypes.string,
-    order_type: PropTypes.string.isRequired,
+    order_type: PropTypes.string,
     status: PropTypes.string,
-  }),
-};
-
-OrderForm.defaultProps = {
-  orderObj: initialState,
+  }).isRequired,
 };
 
 export default OrderForm;

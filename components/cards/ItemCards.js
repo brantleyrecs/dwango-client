@@ -1,13 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-// import { useRouter } from 'next/router';
 import { Card, Button } from 'react-bootstrap';
 import { removeItem } from '../../utils/data/orderData';
 
 export default function ItemCard({ obj }) {
-  // const router = useRouter();
-  // const { id } = router.query ?? {};
-
   const removeThisItem = () => {
     removeItem(obj.id).then(() => {
       window.location.reload();

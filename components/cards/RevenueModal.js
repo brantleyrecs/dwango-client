@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Modal } from 'react-bootstrap';
 import { useRouter } from 'next/router';
-// // eslint-disable-next-line import/no-extraneous-dependencies
-// import DateObject from 'react-date-object';
-import { createRevenueNode, updateOrder } from '../../utils/data/orderData';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import DateObject from 'react-date-object';
+import { createRevenueNode, closeOrder } from '../../utils/data/orderData';
 
 const initialState = {
   id: 0,
@@ -15,14 +15,15 @@ const initialState = {
   tipAmount: 0,
 };
 
-console.warn(updateOrder);
-
-function RevenueNode({ orderDetails }) {
+function RevenueNode({ orderDetails, revObj }) {
   const [modalShow, setModalShow] = useState(false);
   const [revenue, setRevenue] = useState(initialState);
   const router = useRouter();
 
-  // const date = new DateObject();
+  const date = new DateObject({
+    date: new Date(),
+    format: 'YYYY-MM-DD',
+  });
 
   const handleShow = () => {
     setModalShow(true);
@@ -32,22 +33,32 @@ function RevenueNode({ orderDetails }) {
     setModalShow(false);
   };
 
+  const calculateOrderTotal = () => {
+    if (orderDetails.id && orderDetails.items.length > 0) {
+      const total = orderDetails.items.reduce((acc, item) => acc + parseFloat(item.price), 0);
+      return total.toFixed(2);
+    }
+    return '0.00';
+  };
+
+  const calculateFinalTotal = Number(revenue.tipAmount) + Number(calculateOrderTotal());
+
   useEffect(() => {
     if (orderDetails.id) {
       setRevenue({
-        // id: revObj?.id,
+        id: revObj?.id,
         orderId: orderDetails.id,
-        // totalOrderAmount: revObj?.total_order_amount,
-        // date_of_closure: revObj?.date,
-        // paymentType: revObj?.payment_type,
-        // tipAmount: revObj?.tipAmount,
+        totalOrderAmount: Number(calculateFinalTotal()),
+        dateOfClosure: revenue.dateOfClosure,
+        paymentType: revObj?.payment_type,
+        tipAmount: Number(revenue.tipAmount),
       });
     }
-  }, [orderDetails.id]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setRevenue((prevState) => ({
       ...prevState,
       [name]: value,
@@ -56,22 +67,20 @@ function RevenueNode({ orderDetails }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const payload = { ...revenue, orderId: orderDetails.id };
-    createRevenueNode(payload)
-      .then(() => router.push('/orders'));
-    // .then(({ closed }) => {
-    //   const patchOrder = { status: closed };
-    //   updateOrder(patchOrder);
-    // });
-  };
+    const close = { ...orderDetails, status: 'closed' };
+    closeOrder(orderDetails.id, close);
 
-  // const calculateOrderTotal = () => {
-  //   if (orderDetails.id && orderDetails.items.length > 0) {
-  //     const total = orderDetails.items.reduce((acc, item) => acc + parseFloat(item.price), 0);
-  //     return total.toFixed(2);
-  //   }
-  //   return '0.00';
-  // };
+    const payload = { ...revenue };
+
+    payload.orderId = orderDetails.id;
+    payload.totalOrderAmount = Number(calculateFinalTotal);
+    payload.dateOfClosure = date.format();
+    payload.tipAmount = revenue.tipAmount;
+    payload.paymentType = revenue.paymentType;
+
+    createRevenueNode(payload)
+      .then(() => router.push('/'));
+  };
 
   return (
     <>
@@ -79,7 +88,6 @@ function RevenueNode({ orderDetails }) {
         Close Order
       </Button>
       <Modal
-        onSubmit={handleSubmit}
         show={modalShow}
         onHide={handleClose}
       >
@@ -95,8 +103,8 @@ function RevenueNode({ orderDetails }) {
             <Modal.Body>
               <p>{orderDetails.customer_name}</p>
               <p>{orderDetails.phone_number}</p>
-              {/* <p>{date.toString()}</p> */}
-              {/* <p>{calculateOrderTotal()}</p> */}
+              <p value={revenue.dateOfClosure}>{date.format()}</p>
+              <p>{calculateOrderTotal()}</p>
               <Form>
                 {/* Tip Amount */}
                 <input type="text" name="tipAmount" className="input" style={{ width: '450px' }} placeholder="Tip Amount" required value={revenue.tipAmount} onChange={handleChange} />
@@ -110,7 +118,7 @@ function RevenueNode({ orderDetails }) {
             </Modal.Body>
 
             <Modal.Footer>
-              <Button variant="primary" type="submit">Submit</Button>
+              <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
             </Modal.Footer>
           </Modal.Dialog>
         </div>
@@ -124,7 +132,7 @@ RevenueNode.propTypes = {
     id: PropTypes.number,
     customer_name: PropTypes.string,
     phone_number: PropTypes.number,
-    // items: PropTypes.string,
+    items: PropTypes.string,
   }).isRequired,
   revObj: PropTypes.shape({
     id: PropTypes.number,

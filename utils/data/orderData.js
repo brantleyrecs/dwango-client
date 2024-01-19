@@ -87,6 +87,23 @@ const addItem = (id, item) => new Promise((resolve, reject) => {
     });
 });
 
+const closeOrder = (id, status) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/orders/${id}/close`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(status),
+  })
+    .then((data) => {
+      resolve(data);
+    })
+    .catch((error) => {
+      console.error('Error: Item not added:', error);
+      reject(error);
+    });
+});
+
 const removeItem = (id) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/order_items/${id}`, {
     method: 'DELETE',
@@ -122,4 +139,5 @@ export {
   addItem,
   removeItem,
   createRevenueNode,
+  closeOrder,
 };

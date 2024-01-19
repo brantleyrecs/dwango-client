@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-// import { Button } from 'react-bootstrap';
-// import { useRouter } from 'next/router';
 import { getOrders } from '../utils/data/orderData';
 import OrderCard from '../components/cards/OrderCards';
 
 function Orders() {
   const [orders, setOrders] = useState([]);
-  // const router = useRouter();
 
   const showOrders = () => {
-    getOrders().then((data) => setOrders(data));
+    getOrders().then((data) => {
+      const open = data.filter((order) => order.status === 'Open');
+      setOrders(open);
+    });
   };
 
   useEffect(() => {
@@ -30,7 +30,6 @@ function Orders() {
           <div key={`order--${order.id}`} className="order">
             <OrderCard
               obj={order}
-              // onUpdate={showOrders}
             />
           </div>
         ))}

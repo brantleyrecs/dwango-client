@@ -1,13 +1,11 @@
 import { Nav } from 'react-bootstrap';
 import Link from 'next/link';
-// import Image from 'next/image';
 import { useAuth } from '../utils/context/authContext';
 
 function Home() {
   const { user } = useAuth();
   return (
     <>
-      {/* <Image src="public/logo/IMG_9785.jpg" /> */}
       <div
         className="text-center d-flex flex-column justify-content-center align-content-center"
         style={{

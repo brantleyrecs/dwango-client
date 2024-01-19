@@ -1,30 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Form } from 'react-bootstrap';
-// import { useRouter } from 'next/router';
-// import { getSingleItem } from '../../utils/data/itemData';
-// import { addItem } from '../../utils/data/orderData';
 
 export default function AddItemCard({ obj }) {
-  // const [itemObj, setItemObj] = useState({});
-  // const router = useRouter();
-
-  // const singleItem = (id) => {
-  //   getSingleItem(id).then(setItemObj);
-  // };
-
-  // const addThisItem = () => {
-  //   if (window.confirm('Add item?')) {
-  //     addItem(obj.id).then(() => {
-  //       router.push('../../../orders');
-  //     });
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   singleItem();
-  // }, []);
-
   return (
     <>
       <Form>
@@ -58,12 +36,6 @@ export default function AddItemCard({ obj }) {
         <option>Open this select menu</option>
         <option value={obj.id}>{obj.name} || {obj.price}</option>
       </Form.Select>
-      {/* <Card className="card" style={{ width: '18rem', margin: '20px' }}>
-        <Card.Body>
-          <Card.Title>{obj.name}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">{obj.price}</Card.Subtitle>
-        </Card.Body>
-      </Card> */}
     </>
   );
 }

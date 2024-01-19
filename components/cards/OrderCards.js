@@ -2,12 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import Link from 'next/link';
-// import { useAuth } from '../../utils/context/authContext';
 
 export default function OrderCard({ obj }) {
-  // const { user } = useAuth();
-  console.warn(obj);
-
   return (
     <>
       <Link href={`/orders/${obj.id}`} passHref>
@@ -15,13 +11,6 @@ export default function OrderCard({ obj }) {
           <Card.Body>{obj.customer_name}</Card.Body>
           <Card.Body>{obj.phone_number}</Card.Body>
         </Card>
-        {/* <div className="myCard" style={{ cursor: 'pointer' }}>
-          <div className="title">
-            <Card.Text className="post-title-link">
-              {obj.customerName}
-            </Card.Text>
-          </div>
-        </div> */}
       </Link>
     </>
   );

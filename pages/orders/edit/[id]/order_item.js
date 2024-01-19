@@ -13,24 +13,7 @@ const initialState = {
 function AddItems({ obj }) {
   const [items, setItems] = useState([]);
   const [currentOrder, setCurrentOrder] = useState(initialState);
-  // const [itemObj, setItemObj] = useState({});
   const router = useRouter();
-  // const { id } = router.query ?? {};
-
-  // const addThisItem = (e) => {
-  //   e.preventDefault();
-  //   if (window.confirm('Add item?')) {
-  //     const payload = { item: item.id };
-  //     addItem(payload).then(() => {
-  //       router.push('/orders');
-  //     });
-  //   }
-  // };
-
-  // const singleItem = (id) => {
-  //   getSingleItem(id).then(setItemObj);
-  //   console.warn(itemObj);
-  // };
 
   const showItems = () => {
     getItems().then(setItems);

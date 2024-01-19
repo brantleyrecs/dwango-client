@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Card, Button } from 'react-bootstrap';
 import { getSingleOrder, deleteOrder } from '../../utils/data/orderData';
-// import { getItems } from '../../utils/data/itemData';
 import ItemCard from '../../components/cards/ItemCards';
 import OrderMenu from '../../components/cards/OrderMenu';
 import RevenueNode from '../../components/cards/RevenueModal';
@@ -27,7 +25,6 @@ function ViewOrder() {
       });
     }
   };
-  console.warn(orderDetails);
 
   useEffect(() => {
     getSingleOrder(id).then(setOrderDetails);
@@ -49,7 +46,6 @@ function ViewOrder() {
         </Card.Body>
       </Card>
 
-      {/* <button type="button" style={{ marginTop: '20px', marginBottom: '20px' }} href={`../orders/edit/${orderDetails.id}`}>Edit Order</button> */}
       <Button className="delete-button" variant="black" onClick={deleteThisOrder}>Delete This Order</Button>
       <Button className="delete-button" variant="black" href={`/orders/edit/${orderDetails.id}`}>Edit Order</Button>
 
@@ -67,7 +63,6 @@ function ViewOrder() {
             <ItemCard
               obj={item}
               orderId={orderDetails.id}
-              // onUpdate={showOrders}
             />
           </div>
         ))}
