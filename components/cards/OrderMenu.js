@@ -74,7 +74,7 @@ function OrderMenu({ orderId }) {
               aria-label="Item"
               name="item"
               onChange={handleChange}
-              value={formInput.item}
+              value={formInput.items}
               className="mb-3"
             >
               <option value="">Select an Item</option>
@@ -82,8 +82,8 @@ function OrderMenu({ orderId }) {
               menuItems.map((items) => (
                 <>
                   <option
-                    key={items?.id}
-                    value={items?.id}
+                    key={items.id}
+                    value={items.id}
                   >
                     {items.name}
                   </option>

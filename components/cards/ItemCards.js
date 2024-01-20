@@ -3,12 +3,28 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { removeItem } from '../../utils/data/orderData';
 
-export default function ItemCard({ obj }) {
+export default function ItemCard({ obj, orderDetails }) {
   const removeThisItem = () => {
     removeItem(obj.id).then(() => {
       window.location.reload();
     });
   };
+
+  function RemoveButton() {
+    return <Button className="delete-button" variant="black" onClick={removeThisItem}>Remove Item</Button>;
+  }
+
+  function NoRemoveButton() {
+    return <div />;
+  }
+
+  function Buttons() {
+    const isOpen = orderDetails.status;
+    if (isOpen === 'Open') {
+      return <RemoveButton />;
+    }
+    return <NoRemoveButton />;
+  }
 
   return (
     <>
@@ -16,7 +32,7 @@ export default function ItemCard({ obj }) {
         <Card.Body>
           <Card.Title>{obj.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{obj.price}</Card.Subtitle>
-          <Button className="delete-button" variant="black" onClick={removeThisItem}>Remove Item</Button>
+          <Buttons />
         </Card.Body>
       </Card>
     </>
@@ -28,5 +44,8 @@ ItemCard.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     price: PropTypes.number,
+  }).isRequired,
+  orderDetails: PropTypes.shape({
+    status: PropTypes.string,
   }).isRequired,
 };
