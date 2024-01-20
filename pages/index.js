@@ -17,6 +17,7 @@ function Home() {
           padding: '30px',
           maxWidth: '400px',
           margin: '0 auto',
+          color: 'white',
         }}
       >
         <h1 style={{ marginBottom: '50px' }}>Welcome {user.name}! </h1>

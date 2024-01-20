@@ -84,9 +84,7 @@ function RevenueNode({ orderDetails, revObj }) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Close Order
-      </Button>
+      <button className="button" onClick={handleShow} type="button">Close Order</button>
       <Modal
         show={modalShow}
         onHide={handleClose}

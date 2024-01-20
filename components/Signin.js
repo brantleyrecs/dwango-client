@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
 import { signIn } from '../utils/auth';
 
 function Signin() {
@@ -7,6 +6,7 @@ function Signin() {
     <div
       className="text-center d-flex flex-column justify-content-center align-content-center"
       style={{
+        color: 'white',
         height: '90vh',
         padding: '30px',
         margin: '0 auto',
@@ -18,10 +18,21 @@ function Signin() {
       }}
     >
       <h1>Hi there!</h1>
-      <p>Click the button below to login!</p>
-      <Button type="button" size="lg" className="copy-btn" onClick={signIn}>
+      <button
+        className="button"
+        style={{
+          width: '200px',
+          position: 'relative',
+          left: '39%',
+          transform: 'translateY(-25%)',
+        }}
+        onClick={signIn}
+        type="button"
+      >Sign In
+      </button>
+      {/* <Button type="button" size="lg" className="copy-btn" onClick={signIn}>
         Sign In
-      </Button>
+      </Button> */}
     </div>
   );
 }

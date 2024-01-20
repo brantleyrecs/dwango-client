@@ -55,9 +55,7 @@ function OrderMenu({ orderId }) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Add Item
-      </Button>
+      <button className="button" onClick={handleShow} type="button">Add Item</button>
       <Modal
         show={modalShow}
         onHide={handleClose}
