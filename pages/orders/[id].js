@@ -27,6 +27,34 @@ function ViewOrder() {
     }
   };
 
+  function OrderOpen() {
+    return (
+      <div>
+        <button className="button" onClick={deleteThisOrder} type="button">Delete Order</button>
+        <button className="button" type="button">
+          <Link passHref href={`/orders/edit/${orderDetails.id}`}>Edit Order</Link>
+        </button>
+
+        {/* MODAL */}
+        <OrderMenu orderId={orderDetails.id} show={modalShow} onHide={() => setModalShow(false)} />
+
+        <RevenueNode orderDetails={orderDetails} show={modalShow} onHide={() => setModalShow(false)} />
+      </div>
+    );
+  }
+
+  function OrderClosed() {
+    return <div />;
+  }
+
+  function Buttons() {
+    const isOpen = orderDetails.status;
+    if (isOpen === 'Open') {
+      return <OrderOpen />;
+    }
+    return <OrderClosed />;
+  }
+
   useEffect(() => {
     getSingleOrder(id).then(setOrderDetails);
   }, [id]);
@@ -46,16 +74,7 @@ function ViewOrder() {
           </Card.Text>
         </Card.Body>
       </Card>
-
-      <button className="button" onClick={deleteThisOrder} type="button">Delete Order</button>
-      <button className="button" type="button">
-        <Link passHref href={`/orders/edit/${orderDetails.id}`}>Edit Order</Link>
-      </button>
-
-      {/* MODAL */}
-      <OrderMenu orderId={orderDetails.id} show={modalShow} onHide={() => setModalShow(false)} />
-
-      <RevenueNode orderDetails={orderDetails} show={modalShow} onHide={() => setModalShow(false)} />
+      <Buttons />
 
       <div style={{
         display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', margin: '20px',
@@ -65,7 +84,7 @@ function ViewOrder() {
           <div key={`item--${item.id}`} className="item">
             <ItemCard
               obj={item}
-              orderId={orderDetails.id}
+              orderDetails={orderDetails}
             />
           </div>
         ))}

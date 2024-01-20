@@ -54,8 +54,6 @@ function Revenue() {
           </div>
         </div>
       </div>
-      {/* <h1>Revenue</h1>
-      <hr /> */}
     </>
   );
 }

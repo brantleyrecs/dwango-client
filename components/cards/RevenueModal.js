@@ -48,7 +48,7 @@ function RevenueNode({ orderDetails, revObj }) {
       setRevenue({
         id: revObj?.id,
         orderId: orderDetails.id,
-        totalOrderAmount: Number(calculateFinalTotal()),
+        totalOrderAmount: Number(calculateFinalTotal),
         dateOfClosure: revenue.dateOfClosure,
         paymentType: revObj?.payment_type,
         tipAmount: Number(revenue.tipAmount),
@@ -130,7 +130,8 @@ RevenueNode.propTypes = {
     id: PropTypes.number,
     customer_name: PropTypes.string,
     phone_number: PropTypes.number,
-    items: PropTypes.string,
+    // eslint-disable-next-line react/forbid-prop-types
+    items: PropTypes.array,
   }).isRequired,
   revObj: PropTypes.shape({
     id: PropTypes.number,
