@@ -17,22 +17,19 @@ function Signin() {
         paddingBlock: '0 5rem',
       }}
     >
-      <h1>Hi there!</h1>
+      {/* <h1>Hi there!</h1> */}
       <button
         className="button"
         style={{
           width: '200px',
           position: 'relative',
           left: '39%',
-          transform: 'translateY(-25%)',
+          transform: 'translateY(100%)',
         }}
         onClick={signIn}
         type="button"
       >Sign In
       </button>
-      {/* <Button type="button" size="lg" className="copy-btn" onClick={signIn}>
-        Sign In
-      </Button> */}
     </div>
   );
 }
