@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { getSingleOrder, deleteOrder } from '../../utils/data/orderData';
 import ItemCard from '../../components/cards/ItemCards';
 import OrderMenu from '../../components/cards/OrderMenu';
@@ -46,8 +47,10 @@ function ViewOrder() {
         </Card.Body>
       </Card>
 
-      <Button className="delete-button" variant="black" onClick={deleteThisOrder}>Delete This Order</Button>
-      <Button className="delete-button" variant="black" href={`/orders/edit/${orderDetails.id}`}>Edit Order</Button>
+      <button className="button" onClick={deleteThisOrder} type="button">Delete Order</button>
+      <button className="button" type="button">
+        <Link passHref href={`/orders/edit/${orderDetails.id}`}>Edit Order</Link>
+      </button>
 
       {/* MODAL */}
       <OrderMenu orderId={orderDetails.id} show={modalShow} onHide={() => setModalShow(false)} />
