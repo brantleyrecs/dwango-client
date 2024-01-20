@@ -1,3 +1,5 @@
+# Loom Video (https://www.loom.com/share/e77b81c1e7fe488c882dc1420d5c06bf?sid=41689bc2-367b-46ff-866c-b49375be133a)
+
 # React/Next.js Django Auth Template
 
 ## Topics
