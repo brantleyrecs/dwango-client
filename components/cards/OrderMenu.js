@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Form, FloatingLabel } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -15,6 +15,7 @@ function OrderMenu({ orderId }) {
   const [formInput, setFormInput] = useState(initialState);
   const [modalShow, setModalShow] = React.useState(false);
   const [menuItems, setMenuItems] = useState([]);
+  const mountedRef = useRef(true);
 
   const handleShow = () => {
     setModalShow(true);
@@ -25,8 +26,24 @@ function OrderMenu({ orderId }) {
   };
 
   const allMenuItems = () => {
-    getItems().then(setMenuItems);
+    getItems().then((items) => {
+      if (mountedRef.current) {
+        setMenuItems(items);
+      }
+    });
   };
+  useEffect(() => {
+    allMenuItems();
+    setFormInput((prevState) => ({
+      ...prevState,
+      item: menuItems.id,
+      order: orderId,
+    }));
+
+    return () => {
+      mountedRef.current = false;
+    };
+  }, [orderId, menuItems]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,15 +60,6 @@ function OrderMenu({ orderId }) {
       window.location.reload();
     });
   };
-
-  useEffect(() => {
-    allMenuItems();
-    setFormInput((prevState) => ({
-      ...prevState,
-      item: menuItems.id,
-      order: orderId,
-    }));
-  }, [menuItems.id, orderId]);
 
   return (
     <>
@@ -74,20 +82,18 @@ function OrderMenu({ orderId }) {
               aria-label="Item"
               name="item"
               onChange={handleChange}
-              value={formInput.items}
+              value={formInput.item}
               className="mb-3"
             >
               <option value="">Select an Item</option>
               {
               menuItems.map((items) => (
-                <>
-                  <option
-                    key={items.id}
-                    value={items.id}
-                  >
-                    {items.name}
-                  </option>
-                </>
+                <option
+                  key={items.id}
+                  value={items.id}
+                >
+                  {items.name}
+                </option>
               ))
             }
             </Form.Select>
