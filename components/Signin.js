@@ -17,7 +17,6 @@ function Signin() {
         paddingBlock: '0 5rem',
       }}
     >
-      {/* <h1>Hi there!</h1> */}
       <button
         className="button"
         style={{

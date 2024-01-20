@@ -139,7 +139,12 @@ RevenueNode.propTypes = {
     date: PropTypes.string,
     payment_type: PropTypes.string,
     tipAmount: PropTypes.number,
-  }).isRequired,
+  }),
+};
+
+RevenueNode.defaultProps = {
+  revObj: {
+  },
 };
 
 export default RevenueNode;
