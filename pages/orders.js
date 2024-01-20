@@ -28,7 +28,13 @@ function Orders() {
       <div className="post-header">
         <h1 className="welcome-text" style={{ textAlign: 'center' }}>Orders</h1>
         <hr />
-        <h1 className="welcome-text openClosed">Open</h1>
+        <div className="openCard">
+          <div className="openCloseCard">
+            <div className="openCloseCard2">
+              <h1 className="welcome-text openClosed">Open</h1>
+            </div>
+          </div>
+        </div>
       </div>
       <div style={{
         display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center',
@@ -44,7 +50,13 @@ function Orders() {
       </div>
       <br />
       <div className="post-header">
-        <h1 className="welcome-text openClosed">Closed</h1>
+        <div className="openCard">
+          <div className="openCloseCard">
+            <div className="openCloseCard2">
+              <h1 className="welcome-text openClosed">Closed</h1>
+            </div>
+          </div>
+        </div>
       </div>
       <div style={{
         display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center',
