@@ -27,7 +27,7 @@ body {
 
 .openClosed {
   text-align: center;
-  color: rgb(229, 153, 40);
+  color: rgb(255, 255, 255);
 }
 
 hr.new {
@@ -195,6 +195,37 @@ button:hover::before {
   box-shadow: inset 20px 20px 25px #d1d1d1,
     inset -12px -12px 25px #ffffff;
   transition: 0.3s;
+}
+
+/* openCloseCard */
+.openCard{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.openCloseCard {
+  width: 150px;
+  height: 50px;
+  background-image: linear-gradient(163deg, #ff0000c2 0%, #ff9d00c2 100%);
+  border-radius: 20px;
+  transition: all .3s;
+}
+
+.openCloseCard2 {
+  width: 150px;
+  height: 50px;
+  background-color: #1a1a1aba;
+  border-radius: 20px;
+  transition: all .2s;
+}
+
+.openCloseCard2 {
+  transform: scale(0.98);
+  border-radius: 20px;
+}
+
+.openCloseCard {
+  box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
 }
 
 /* form button */
